@@ -6,41 +6,57 @@ using System.Threading.Tasks;
 
 namespace Hometask_Egor_Mansur_26
 {
-    public interface IPrintable
+    interface IPrintable
     {
         string Print();
     }
 
-    public class Document : IPrintable
+    class Document : IPrintable
     {
+        public string Title { get; set; }
         public string Content { get; set; }
-
+        public Document(string title, string content)
+        {
+            Title = title;
+            Content = content;
+        }
         public string Print()
         {
-            return $"Document Content: {Content}";
+            return $"Документ: {Title}\nСодержание: {Content}";
         }
     }
 
-    public class Report : IPrintable
+    class Report : IPrintable
     {
-        public string Title { get; set; }
-
+        public string ReportName { get; set; }
+        public DateTime Date { get; set; }
+        public Report(string reportName, DateTime date)
+        {
+            ReportName = reportName;
+            Date = date;
+        }
         public string Print()
         {
-            return $"Report Title: {Title}";
+            return $"Отчёт: {ReportName}\nДата: {Date.ToShortDateString()}";
         }
-}
+    }
 
-// Демонстрация универсальности интерфейса
-var printableList = new List<IPrintable>
-{
-    new Document { Content = "Project Plan" },
-    new Report { Title = "Annual Report" }
-};
+    class Task2
+    {
+        public static void Execute()
+        {
+            List<IPrintable> printables = new List<IPrintable>
+            {
+                new Document("Контракт", "Договор на поставку товаров."),
+                new Report("Годовой отчёт", DateTime.Now)
+            };
 
-foreach (var printable in printableList)
-{
-    Console.WriteLine(printable.Print());
-}
+            foreach (var printable in printables)
+            {
+                Console.WriteLine(printable.Print());
+                Console.WriteLine("----------------------");
+            }
+        }
+    }
 
 }

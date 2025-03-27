@@ -6,49 +6,48 @@ using System.Threading.Tasks;
 
 namespace Hometask_Egor_Mansur_26
 {
-    public class Animal
+    class Task1
+    {
+        public static void Execute()
+        {
+            List<Animal> animals = new List<Animal> { new Dog("Бобик", 3), new Cat("Мурка", 2) };
+            foreach (var animal in animals)
+            {
+                animal.Speak();
+            }
+        }
+    }
+
+    class Animal
     {
         public string Name { get; set; }
         public int Age { get; set; }
-
+        public Animal(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
         public virtual void Speak()
         {
-            Console.WriteLine($"{Name} издаёт неопределённый звук.");
+            Console.WriteLine("Животное издаёт звук");
         }
     }
 
-    public class Dog : Animal
+    class Dog : Animal
     {
+        public Dog(string name, int age) : base(name, age) { }
         public override void Speak()
         {
-            Console.WriteLine($"{Name} говорит: \"Гав!\"");
+            Console.WriteLine("Гав! Гав!");
         }
     }
 
-    public class Cat : Animal
+    class Cat : Animal
     {
+        public Cat(string name, int age) : base(name, age) { }
         public override void Speak()
         {
-            Console.WriteLine($"{Name} говорит: \"Мяу!\"");
-        }
-    }
-
-    // Демонстрация полиморфизма
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var animals = new List<Animal>
-        {
-            new Dog { Name = "Бобик", Age = 3 },
-            new Cat { Name = "Мурка", Age = 2 }
-        };
-
-            foreach (var animal in animals)
-            {
-                Console.WriteLine($"{animal.Name} ({animal.Age} года) говорит:");
-                animal.Speak();
-            }
+            Console.WriteLine("Мяу! Мяу!");
         }
     }
 }
