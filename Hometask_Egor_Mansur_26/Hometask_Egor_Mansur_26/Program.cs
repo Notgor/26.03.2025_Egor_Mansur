@@ -13,7 +13,7 @@ namespace Hometask_Egor_Mansur_26
         {
             while (true)
             {
-                Console.WriteLine("Введите номер задания (от 1 до 10) или 0 для выхода:");
+                Console.WriteLine("Введите номер задания (от 1 до 15) или 0 для выхода:");
                 if (int.TryParse(Console.ReadLine(), out int taskNumber))
                 {
                     if (taskNumber == 0) break;
